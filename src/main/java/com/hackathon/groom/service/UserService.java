@@ -12,8 +12,14 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void createUser(User user) {
-        userRepository.save(user);
+    public boolean createUser(User user) {
+        if (userRepository.findUserByUserId(user.getUserId()) == null) {
+            userRepository.save(user);
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
 }

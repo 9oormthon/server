@@ -17,8 +17,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public boolean signUpWithNickname(@RequestBody User user) {
-        userService.createUser(user);
-        return true;
+        return userService.createUser(user);
     }
 
 }
