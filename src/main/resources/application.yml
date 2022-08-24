@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+    context-path: /
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://goorm.csnfj5mh7hm4.ap-northeast-2.rds.amazonaws.com:3306/goorm?serverTimezone=UTC&characterEncoding=UTF-8
+    username: admin
+    password: asdfasdf1!
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+logging.level:
+  org.hibernate.SQL: debug
