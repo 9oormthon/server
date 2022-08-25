@@ -25,7 +25,9 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                         post.createdAt,
                         post.title,
                         user.userName,
-                        user.years
+                        user.years,
+                        post.location,
+                        post.category
                 ))
                 .from(post)
                 .join(user).on(post.userId.eq(user.id))
@@ -52,6 +54,28 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 .join(user).on(post.userId.eq(user.id))
                 .where(post.id.eq(postId))
                 .fetchOne();
+    }
+
+    @Override
+    public List<PostsResponseDto> findPostsByUserName(String userName) {
+               return queryFactory
+                       .select(Projections.bean(
+                            PostsResponseDto.class,
+                            post.id.as("postId"),
+                            post.contents,
+                            post.createdAt,
+                            post.title,
+                            user.userName,
+                            user.years,
+                            post.location,
+                            post.category
+                    ))
+                            .from(post)
+                            .join(user).on(post.userId.eq(user.id))
+                            .where(user.userName.eq(userName))
+                            .orderBy(post.createdAt.desc())
+                            .limit(10)
+                            .fetch();
     }
 
 //    @Override

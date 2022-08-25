@@ -2,6 +2,7 @@ package com.hackathon.groom.domain.repository;
 
 import com.hackathon.groom.domain.Comment;
 import com.hackathon.groom.responsedto.CommentResponseDto;
+import com.hackathon.groom.responsedto.MyPageCommentResponseDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static com.hackathon.groom.domain.QComment.comment;
 import static com.hackathon.groom.domain.QUser.user;
+import static com.hackathon.groom.domain.QPost.post;
 
 @RequiredArgsConstructor
 public class CommentRepositoryImpl implements CommentRepositoryCustom {
@@ -22,7 +24,7 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
         return queryFactory
                 .select(Projections.bean(
                         CommentResponseDto.class,
-                        comment.id.as("commentId"),
+                        comment.id.as("comment.id"),
                         comment.contents,
                         comment.createdAt,
                         user.userName,
@@ -42,5 +44,25 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
                 .delete(comment)
                 .where(comment.postId.eq(postId))
                 .execute();
+    }
+
+    @Override
+    public List<MyPageCommentResponseDto> findCommentsByUserName(String userName) {
+        return queryFactory
+                .select(Projections.bean(
+                        MyPageCommentResponseDto.class,
+                        comment.id,
+                        comment.contents,
+                        comment.createdAt,
+                        post.location,
+                        post.category,
+                        post.title
+                ))
+                .from(comment)
+                .join(user).on(comment.userId.eq(user.id))
+                .join(post).on(comment.postId.eq(post.id))
+                .where(user.userName.eq(userName))
+                .limit(10)
+                .fetch();
     }
 }

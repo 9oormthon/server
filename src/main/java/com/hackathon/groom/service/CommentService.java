@@ -5,10 +5,13 @@ import com.hackathon.groom.domain.CommentRepository;
 import com.hackathon.groom.domain.User;
 import com.hackathon.groom.domain.UserRepository;
 import com.hackathon.groom.requestdto.NewCommentRequestDto;
+import com.hackathon.groom.responsedto.MyPageCommentResponseDto;
+import com.hackathon.groom.responsedto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -29,5 +32,9 @@ public class CommentService {
 
 
         commentRepository.save(comment);
+    }
+
+    public List<MyPageCommentResponseDto> getCommentsByUserName(String userName) {
+        return commentRepository.findCommentsByUserName(userName);
     }
 }

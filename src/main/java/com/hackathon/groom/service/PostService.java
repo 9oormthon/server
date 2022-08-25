@@ -63,4 +63,8 @@ public class PostService {
             postRepository.deleteById(deletePostRequestDto.getPostId());
         }
     }
+
+    public List<PostsResponseDto> getPostsByUserName(String userName) {
+        return postRepository.findPostsByUserName(userName);
+    }
 }

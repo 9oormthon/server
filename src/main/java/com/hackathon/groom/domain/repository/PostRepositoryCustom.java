@@ -10,5 +10,7 @@ public interface PostRepositoryCustom {
 
     PostResponseDto findPostById(Long postId);
 
+    List<PostsResponseDto> findPostsByUserName(String userName);
+
 //    long deletePostById(Long postId);
 }

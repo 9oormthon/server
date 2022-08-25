@@ -17,4 +17,6 @@ public class PostsResponseDto {
     private LocalDateTime createdAt;
     private String userName;
     private Integer years;
+    private String location;
+    private String category;
 }
