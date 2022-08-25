@@ -24,7 +24,7 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
         return queryFactory
                 .select(Projections.bean(
                         CommentResponseDto.class,
-                        comment.id.as("comment.id"),
+                        comment.id.as("commentId"),
                         comment.contents,
                         comment.createdAt,
                         user.userName,
