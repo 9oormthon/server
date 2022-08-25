@@ -1,6 +1,5 @@
 package com.hackathon.groom.domain;
 
-import jdk.vm.ci.meta.Local;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,4 +23,7 @@ public class Comment {
 
     @Column(nullable = false)
     private Long userId;
+
+    @Column(nullable = false)
+    private Long postId;
 }

@@ -6,4 +6,6 @@ public interface UserRepositoryCustom {
 
     User findUserByUserName(String username);
 
+    User findUserById(Long userId);
+
 }

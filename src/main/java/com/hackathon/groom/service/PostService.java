@@ -1,11 +1,9 @@
 package com.hackathon.groom.service;
 
 
-import com.hackathon.groom.domain.Post;
-import com.hackathon.groom.domain.PostRepository;
-import com.hackathon.groom.domain.User;
-import com.hackathon.groom.domain.UserRepository;
+import com.hackathon.groom.domain.*;
 import com.hackathon.groom.requestdto.NewPostRequestDto;
+import com.hackathon.groom.responsedto.PostResponseDto;
 import com.hackathon.groom.responsedto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +19,8 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+
     public void createPost(NewPostRequestDto newPostRequestDto) {
         //userName DB에 있는지 체크해주는 로직 필요할 듯
 
@@ -40,5 +40,16 @@ public class PostService {
 
     public List<PostsResponseDto> getPosts() {
         return postRepository.findPosts();
+    }
+
+    public PostResponseDto getPost(Long postId) {
+        PostResponseDto postResponseDto = postRepository.findPostById(postId);
+
+        List<Comment> comments = commentRepository.findCommentsByPostId(postId);
+        postResponseDto.setComment(comments);
+        postResponseDto.setCommentsCount(comments.size());
+
+
+        return postResponseDto;
     }
 }

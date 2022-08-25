@@ -1,5 +1,6 @@
 package com.hackathon.groom.domain.repository;
 
+import com.hackathon.groom.responsedto.PostResponseDto;
 import com.hackathon.groom.responsedto.PostsResponseDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -31,5 +32,25 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 .orderBy(post.createdAt.desc())
                 .limit(10)
                 .fetch();
+    }
+
+    @Override
+    public PostResponseDto findPostById(Long postId) {
+        return queryFactory
+                .select(Projections.bean(
+                        PostResponseDto.class,
+                        post.id.as("postId"),
+                        post.contents,
+                        post.title,
+                        post.createdAt,
+                        post.category,
+                        post.location,
+                        user.userName,
+                        user.years
+                ))
+                .from(post)
+                .join(user).on(post.userId.eq(user.id))
+                .where(post.id.eq(postId))
+                .fetchOne();
     }
 }
