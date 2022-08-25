@@ -1,10 +1,12 @@
 package com.hackathon.groom.controller;
 import com.hackathon.groom.domain.Post;
+import com.hackathon.groom.requestdto.DeletePostRequestDto;
 import com.hackathon.groom.requestdto.NewPostRequestDto;
 import com.hackathon.groom.responsedto.PostResponseDto;
 import com.hackathon.groom.responsedto.PostsResponseDto;
 import com.hackathon.groom.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,9 +34,10 @@ public class PostController {
         return postService.getPost(postId);
     }
 
-    @DeleteMapping("/delete/{postId}")
-    public boolean deletePost(@PathVariable Long postId) {
-        postService.deletePost(postId);
+    @DeleteMapping("/post")
+    public boolean deletePost(@RequestBody DeletePostRequestDto deletePostRequestDto) {
+
+        postService.deletePost(deletePostRequestDto);
         return true;
     }
 

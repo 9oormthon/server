@@ -2,6 +2,7 @@ package com.hackathon.groom.service;
 
 
 import com.hackathon.groom.domain.*;
+import com.hackathon.groom.requestdto.DeletePostRequestDto;
 import com.hackathon.groom.requestdto.NewPostRequestDto;
 import com.hackathon.groom.responsedto.PostResponseDto;
 import com.hackathon.groom.responsedto.PostsResponseDto;
@@ -55,7 +56,11 @@ public class PostService {
     }
 
     @Transactional
-    public void deletePost(Long postId) {
-        postRepository.deleteById(postId);
+    public boolean deletePost(DeletePostRequestDto deletePostRequestDto) {
+        if(deletePostRequestDto.getUserName().equals(postRepository.findPostById(deletePostRequestDto.getPostId()).getUserName())) {
+            postRepository.deleteById(deletePostRequestDto.getPostId());
+            return true;
+        }
+        return false;
     }
 }
