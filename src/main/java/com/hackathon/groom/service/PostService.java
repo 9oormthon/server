@@ -44,7 +44,7 @@ public class PostService {
         return postRepository.findPosts();
     }
 
-    public PostResponseDto getPost(Long postId) {
+    public PostResponseDto getPost(Long postId) { //TODO -> 댓글에 userId가 아닌 userName 보내야 됨.
         PostResponseDto postResponseDto = postRepository.findPostById(postId);
 
         List<Comment> comments = commentRepository.findCommentsByPostId(postId);

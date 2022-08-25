@@ -10,7 +10,9 @@ public class GoormConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
+                .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS")
                 .allowedOrigins("*");
+        //TODO -> allowCredentials
 
     }
 }
