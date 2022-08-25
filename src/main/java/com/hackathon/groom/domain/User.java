@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -16,8 +18,10 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String userName;
 
     @Column(nullable = false)
     private int years;
+
+
 }

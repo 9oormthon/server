@@ -13,7 +13,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public boolean createUser(User user) {
-        if (userRepository.findUserByUserId(user.getUserId()) == null) {
+        if (userRepository.findUserByUserName(user.getUserName()) == null) {
             userRepository.save(user);
         } else {
             return false;
