@@ -7,4 +7,6 @@ import java.util.List;
 public interface CommentRepositoryCustom {
 
     List<Comment> findCommentsByPostId(Long postId);
+
+    void deleteCommentsByPostId(Long postId);
 }

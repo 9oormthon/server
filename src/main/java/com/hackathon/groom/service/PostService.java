@@ -56,11 +56,10 @@ public class PostService {
     }
 
     @Transactional
-    public boolean deletePost(DeletePostRequestDto deletePostRequestDto) {
+    public void deletePost(DeletePostRequestDto deletePostRequestDto) {
         if(deletePostRequestDto.getUserName().equals(postRepository.findPostById(deletePostRequestDto.getPostId()).getUserName())) {
+            commentRepository.deleteCommentsByPostId(deletePostRequestDto.getPostId());
             postRepository.deleteById(deletePostRequestDto.getPostId());
-            return true;
         }
-        return false;
     }
 }

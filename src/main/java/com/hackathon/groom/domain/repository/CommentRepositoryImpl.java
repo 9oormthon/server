@@ -23,4 +23,12 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
                 .limit(10)
                 .fetch();
     }
+
+    @Override
+    public void deleteCommentsByPostId(Long postId) {
+        queryFactory
+                .delete(comment)
+                .where(comment.postId.eq(postId))
+                .execute();
+    }
 }
