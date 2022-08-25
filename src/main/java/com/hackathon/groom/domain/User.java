@@ -23,5 +23,6 @@ public class User {
     @Column(nullable = false)
     private int years;
 
-
+//    @OneToMany(mappedBy = "user")
+//    private List<Post> posts = new ArrayList<>();
 }

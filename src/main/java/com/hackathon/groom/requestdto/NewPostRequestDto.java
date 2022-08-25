@@ -12,19 +12,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class NewPostRequestDto {
 
-    private Long id;
-
+    private String userName;
     private String title;
-
     private String contents;
-
-    private LocalDateTime createdAt;
-
-    private String location;
-
     private String category;
-
-    private String username;
+    private String location;
 
 }
 

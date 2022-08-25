@@ -6,24 +6,39 @@ import com.hackathon.groom.domain.PostRepository;
 import com.hackathon.groom.domain.User;
 import com.hackathon.groom.domain.UserRepository;
 import com.hackathon.groom.requestdto.NewPostRequestDto;
+import com.hackathon.groom.responsedto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-
-
-    public void createPost(Post post) {
-        //User user = userRepository.findUserByUserName(newPostRequestDto.getUsername());
-        //newPostRequestDto에 username을 받으니까 username으로 user 객체를 받아서
-        //Post 객체에 setUserId 이런건 안좋은 패턴?
-
+    public void createPost(NewPostRequestDto newPostRequestDto) {
         //userName DB에 있는지 체크해주는 로직 필요할 듯
 
+        String username = newPostRequestDto.getUserName();
+        User user = userRepository.findUserByUserName(username);
+
+        Post post = new Post(); //anti pattern
+        post.setTitle(newPostRequestDto.getTitle());
+        post.setCreatedAt(LocalDateTime.now());
+        post.setCategory(newPostRequestDto.getCategory());
+        post.setContents(newPostRequestDto.getContents());
+        post.setLocation(newPostRequestDto.getLocation());
+        post.setUserId(user.getId());
+
         postRepository.save(post);
+    }
+
+    public List<PostsResponseDto> getPosts() {
+        return postRepository.findPosts();
     }
 }

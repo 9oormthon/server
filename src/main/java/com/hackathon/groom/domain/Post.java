@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor()
 public class Post {
 
     @Id
@@ -34,5 +34,12 @@ public class Post {
     private String category;
 
     @Column(nullable = false)
-    private String userName;
+    private Long userId;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
+//    @Column(nullable = false)
+//    private Long commentId;
 }
