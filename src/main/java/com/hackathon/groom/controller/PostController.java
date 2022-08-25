@@ -34,9 +34,8 @@ public class PostController {
         return postService.getPost(postId);
     }
 
-    @DeleteMapping("/post")
+    @PostMapping("/delete")
     public boolean deletePost(@RequestBody DeletePostRequestDto deletePostRequestDto) {
-
         postService.deletePost(deletePostRequestDto);
         return true;
     }
