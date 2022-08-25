@@ -12,7 +12,5 @@ public class GoormConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS")
                 .allowedOrigins("*");
-        //TODO -> allowCredentials
-
     }
 }

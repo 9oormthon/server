@@ -1,12 +1,15 @@
 package com.hackathon.groom.domain.repository;
 
 import com.hackathon.groom.domain.Comment;
+import com.hackathon.groom.responsedto.CommentResponseDto;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 import static com.hackathon.groom.domain.QComment.comment;
+import static com.hackathon.groom.domain.QUser.user;
 
 @RequiredArgsConstructor
 public class CommentRepositoryImpl implements CommentRepositoryCustom {
@@ -15,9 +18,18 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
 
 
     @Override
-    public List<Comment> findCommentsByPostId(Long postId) {
+    public List<CommentResponseDto> findCommentsByPostId(Long postId) {
         return queryFactory
-                .selectFrom(comment)
+                .select(Projections.bean(
+                        CommentResponseDto.class,
+                        comment.id.as("commentId"),
+                        comment.contents,
+                        comment.createdAt,
+                        user.userName,
+                        comment.postId
+                        ))
+                .from(comment)
+                .join(user).on(comment.userId.eq(user.id))
                 .where(comment.postId.eq(postId))
                 .orderBy(comment.createdAt.desc())
                 .limit(10)

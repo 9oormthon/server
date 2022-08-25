@@ -4,6 +4,7 @@ package com.hackathon.groom.service;
 import com.hackathon.groom.domain.*;
 import com.hackathon.groom.requestdto.DeletePostRequestDto;
 import com.hackathon.groom.requestdto.NewPostRequestDto;
+import com.hackathon.groom.responsedto.CommentResponseDto;
 import com.hackathon.groom.responsedto.PostResponseDto;
 import com.hackathon.groom.responsedto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -44,10 +45,10 @@ public class PostService {
         return postRepository.findPosts();
     }
 
-    public PostResponseDto getPost(Long postId) { //TODO -> 댓글에 userId가 아닌 userName 보내야 됨.
+    public PostResponseDto getPost(Long postId) {
         PostResponseDto postResponseDto = postRepository.findPostById(postId);
 
-        List<Comment> comments = commentRepository.findCommentsByPostId(postId);
+        List<CommentResponseDto> comments = commentRepository.findCommentsByPostId(postId);
         postResponseDto.setComment(comments);
         postResponseDto.setCommentsCount(comments.size());
 

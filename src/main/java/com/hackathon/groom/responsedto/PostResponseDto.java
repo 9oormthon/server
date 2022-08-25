@@ -20,7 +20,7 @@ public class PostResponseDto {
     private String title;
     private String contents;
     private LocalDateTime createdAt;
-    private List<Comment> comment;
+    private List<CommentResponseDto> comment;
     private Integer commentsCount;
     private String category;
     private Integer years;
