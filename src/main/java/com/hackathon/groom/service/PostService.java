@@ -52,4 +52,8 @@ public class PostService {
 
         return postResponseDto;
     }
+
+    public void deletePost(Long postId) {
+        postRepository.deleteById(postId);
+    }
 }

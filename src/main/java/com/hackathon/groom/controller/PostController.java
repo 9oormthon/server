@@ -30,7 +30,12 @@ public class PostController {
     @GetMapping("/list/{postId}")
     public PostResponseDto getPost(@PathVariable Long postId) {
         return postService.getPost(postId);
+    }
 
+    @DeleteMapping("/post")
+    public boolean deletePost(@RequestBody Long postId) {
+        postService.deletePost(postId);
+        return true;
     }
 
 }
