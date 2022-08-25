@@ -22,14 +22,14 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @GetMapping("/mypage/posts")
-    public boolean getMyPosts(@RequestBody String userName) {
+    @GetMapping("/myPage/posts")
+    public boolean getMyPosts(@RequestParam String userName) {
         postService.getPostsByUserName(userName);
         return true;
     }
 
-    @GetMapping("/mypage/comments")
-    public boolean getMyComments(@RequestBody String userName) {
+    @GetMapping("/myPage/comments")
+    public boolean getMyComments(@RequestParam String userName) {
         commentService.getCommentsByUserName(userName);
         return true;
     }
