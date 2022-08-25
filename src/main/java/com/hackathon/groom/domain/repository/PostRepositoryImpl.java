@@ -53,4 +53,12 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 .where(post.id.eq(postId))
                 .fetchOne();
     }
+
+//    @Override
+//    public long deletePostById(Long postId) {
+//        return queryFactory
+//                .delete(post)
+//                .where(post.id.eq(postId))
+//                .execute();
+//    }
 }
