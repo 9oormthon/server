@@ -54,8 +54,7 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
                         comment.id,
                         comment.contents,
                         comment.createdAt,
-                        post.location,
-                        post.category,
+                        post.id.as("postId"),
                         post.title
                 ))
                 .from(comment)

@@ -16,7 +16,6 @@ public class MyPageCommentResponseDto {
     private LocalDateTime createdAt;
     private String title;
     private String contents;
-    private String postLocation;
-    private String postCategory;
+    private Long postId;
     private String postTitle;
 }
