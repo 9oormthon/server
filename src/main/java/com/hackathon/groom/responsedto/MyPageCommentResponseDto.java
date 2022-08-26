@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class MyPageCommentResponseDto {
 
     private LocalDateTime createdAt;
-    private String title;
+    private Long commentId;
     private String contents;
     private Long postId;
     private String postTitle;

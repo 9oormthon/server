@@ -51,11 +51,11 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
         return queryFactory
                 .select(Projections.bean(
                         MyPageCommentResponseDto.class,
-                        comment.id,
+                        comment.id.as("commentId"),
                         comment.contents,
                         comment.createdAt,
                         post.id.as("postId"),
-                        post.title
+                        post.title.as("postTitle")
                 ))
                 .from(comment)
                 .join(user).on(comment.userId.eq(user.id))
